@@ -14,6 +14,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import Loader from "./Loader";
 
 Chart.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -105,6 +106,11 @@ const QuizApp = () => {
       <div className="text-left border border-gray-300 p-2 rounded mt-4 dark:border-gray-700">
         {paragraph}
       </div>
+      {loading && (
+        <div className="flex justify-center items-center mt-5">
+        <Loader />
+        </div>
+        )}
       {quizData && (
         <Card className="shadow-lg p-4 mt-5 dark:bg-gray-800">
           <CardContent>

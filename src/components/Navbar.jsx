@@ -7,12 +7,13 @@ import {
 import { Menu } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 import { ModeToggle } from "@/components/mode-toggle";
 import { nanoid } from "nanoid";
+import GeminiPowered from "./Gemini_logo";
 const Navbar = () => {
-  return (
-    <Card className="container bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl mt-5">
+  return (<div className="flex justify-center">
+
+    <Card className="container bg-card border-0 flex items-center justify-between gap-6 px-2">
       {/* Desktop Navigation */}
       <ul className="hidden md:flex items-center gap-10 text-card-foreground">
         <li className="text-primary font-medium">
@@ -66,8 +67,11 @@ const Navbar = () => {
 
         {/* <ThemeToggle /> */}
         <ModeToggle />
+        {/* Gemini credit */}
+        <GeminiPowered/>
       </div>
     </Card>
+  </div>
   );
 };
 
