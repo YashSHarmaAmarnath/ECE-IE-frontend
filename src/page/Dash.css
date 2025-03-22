@@ -1,0 +1,13 @@
+.program{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15vh;
+}
+
+#quiz1{
+    height: 30vh;
+    margin-left: 5vh;
+    width: 70vh;
+}

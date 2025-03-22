@@ -10,68 +10,67 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { nanoid } from "nanoid";
 import GeminiPowered from "./Gemini_logo";
+import { Link } from "react-router-dom";
 const Navbar = () => {
-  return (<div className="flex justify-center">
+  return (
+    <div className="flex justify-center">
+      <Card className="container bg-card border-0 flex items-center justify-between gap-6 px-2">
+      
+        <ul className="hidden md:flex items-center gap-10 text-card-foreground">
+          <li className="text-primary font-medium">
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/feat">Features</Link>
+          </li>
 
-    <Card className="container bg-card border-0 flex items-center justify-between gap-6 px-2">
-      {/* Desktop Navigation */}
-      <ul className="hidden md:flex items-center gap-10 text-card-foreground">
-        <li className="text-primary font-medium">
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#features">Features</a>
-        </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
 
-        <li>
-          <a href="#About">About</a>
-        </li>
-        <li></li>
-      </ul>
-
-      {/* Right Side Buttons */}
-      <div className="flex items-center">
-        {/* Mobile Menu */}
-        <div className="flex md:hidden mr-2 items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Menu className="h-5 w-5 rotate-0 scale-100" />
-              </Button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>
-                <a href="#home">Home</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <a href="#features">Features</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <a href="#pricing">Pricing</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <a href="#faqs">FAQs</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Button variant="secondary" className="w-full text-sm">
-                  Login
+        {/* Right Side Buttons */}
+        <div className="flex items-center">
+          {/* Mobile Menu */}
+          <div className="flex md:hidden mr-2 items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="h-5 w-5 rotate-0 scale-100" />
                 </Button>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Button className="w-full text-sm">Get Started</Button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+              </DropdownMenuTrigger>
 
-        {/* <ThemeToggle /> */}
-        <ModeToggle />
-        {/* Gemini credit */}
-        <GeminiPowered/>
-      </div>
-    </Card>
-  </div>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                <Link to="/">Home</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                <Link to="/feat">Features</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                <Link to="/about">About</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button variant="secondary" className="w-full text-sm">
+                    Login
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button className="w-full text-sm">Get Started</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+
+
+          {/* <ThemeToggle /> */}
+          <ModeToggle />
+          {/* Gemini credit */}
+          <GeminiPowered />
+        </div>
+      </Card>
+    </div>
   );
 };
 

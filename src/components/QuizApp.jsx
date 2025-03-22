@@ -13,8 +13,10 @@ import {
   BarElement,
   Tooltip,
   Legend,
+  Colors,
 } from "chart.js";
 import Loader from "./Loader";
+import { Link } from "react-router-dom";
 
 Chart.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -87,7 +89,13 @@ const QuizApp = () => {
   };
 
   return (
+    <>
+    <br />
+    <Button style={{marginLeft:'3vh'}}  variant="outline" className="px-4 py-4 text-md border-blue-600 text-blue-600 hover:bg-blue-100 dark:text-white dark:hover:bg-gray-800" asChild>
+              <Link to="/dash">← Go Back</Link>
+      </Button>
     <div className="text-center p-5">
+      
       <h1 className="text-2xl font-bold mb-4">Reading Comprehension Quiz</h1>
       <Textarea
         rows="3"
@@ -195,6 +203,7 @@ const QuizApp = () => {
       )}
       {showAns && <QuizAnswers quizData={quizData} />}
     </div>
+    </>
   );
 };
 
