@@ -11,6 +11,7 @@ import FeaturesPage from "./page/Features";
 import About from "./page/About";
 import Game from "./components/Game";
 import Dash from "./page/Dash";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
   return ( 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/quiz" element={<QuizApp />} />
         <Route path="/dash" element={<Dash />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
       </ThemeProvider>
     

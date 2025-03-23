@@ -53,7 +53,7 @@ const Game = () => {
     }
     setScore(totalScore);
     setShowResult(true);
-
+    console.log("Total Score:", totalScore);
     try {
       const token = localStorage.getItem("token");
       const username = localStorage.getItem("username");
@@ -61,7 +61,7 @@ const Game = () => {
       if (token && username) {
         await axios.post(
           "http://localhost:3000/submit-score",
-          { username, score: totalScore },
+          { username, score: totalScore ,category:"Word Scramble"},
           { headers: { Authorization: `Bearer ${token}` } }
         );
       }
@@ -151,7 +151,7 @@ const Game = () => {
                     onClick={() => setShowLeaderboard(true)}
                     className="mt-4 bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-700"
                   >
-                    View Leaderboard
+                    View Score History
                   </button>
                   <button
                     onClick={restartGame}

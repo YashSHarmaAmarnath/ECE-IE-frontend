@@ -55,7 +55,7 @@ const QuizApp = () => {
     setUserAnswers({ ...userAnswers, [questionIndex]: answer });
   };
 
-  const calculateScore = () => {
+  const calculateScore = async () => {
     let newScore = 0;
     quizData.questions.forEach((question, index) => {
       const correctAnswer = question.correctAnswer
@@ -72,6 +72,21 @@ const QuizApp = () => {
     });
     setScore(newScore);
     setShowAns(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      const username = localStorage.getItem("username");
+      
+      if (token && username) {
+        await axios.post(
+          "http://localhost:3000/submit-score",
+          { username, score: newScore ,category:"MCQ"},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      }
+    } catch (err) {
+      console.error("Error submitting score", err);
+    }
   };
 
   const chartData = {

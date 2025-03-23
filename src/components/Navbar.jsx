@@ -11,7 +11,24 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { nanoid } from "nanoid";
 import GeminiPowered from "./Gemini_logo";
 import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:3000/api/auth/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => setUser(res.data))
+        .catch(() => localStorage.removeItem("token")); // Clear token if invalid
+    }
+  }, []);
+
   return (
     <div className="flex justify-center">
       <Card className="container bg-card border-0 flex items-center justify-between gap-6 px-2">
@@ -20,12 +37,28 @@ const Navbar = () => {
           <li className="text-primary font-medium">
             <Link to="/">Home</Link>
           </li>
+          {user?
+          (<>
+          <li>
+            <Link to="/dash">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/quiz">MCQ</Link>
+          </li>
+          <li>
+            <Link to="/game">Scramble word</Link>
+          </li>
+          </>
+        ):(<></>)}
           <li>
             <Link to="/feat">Features</Link>
           </li>
 
           <li>
             <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/leaderboard">Leaderboard</Link>
           </li>
         </ul>
 
