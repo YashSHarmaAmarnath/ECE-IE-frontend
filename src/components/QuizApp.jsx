@@ -17,6 +17,7 @@ import {
 } from "chart.js";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
+import { BookOpen, ArrowLeft, Check, X } from "lucide-react";
 
 Chart.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -80,7 +81,7 @@ const QuizApp = () => {
       if (token && username) {
         await axios.post(
           "http://localhost:3000/submit-score",
-          { username, score: newScore ,category:"MCQ"},
+          { username, score: newScore, category:"MCQ"},
           { headers: { Authorization: `Bearer ${token}` } }
         );
       }
@@ -98,63 +99,90 @@ const QuizApp = () => {
           score || 0,
           quizData ? quizData.questions.length - (score || 0) : 0,
         ],
-        backgroundColor: ["#4a4f49", "#ffffff"],
+        backgroundColor: ["#10B981", "#EF4444"],
       },
     ],
   };
 
+  // Check if all questions are answered
+  const allQuestionsAnswered = quizData 
+    ? quizData.questions.length === Object.keys(userAnswers).length 
+    : false;
+
   return (
-    <>
-    <br />
-    <Button style={{marginLeft:'3vh'}}  variant="outline" className="px-4 py-4 text-md border-blue-600 text-blue-600 hover:bg-blue-100 dark:text-white dark:hover:bg-gray-800" asChild>
-              <Link to="/dash">← Go Back</Link>
-      </Button>
-    <div className="text-center p-5">
-      
-      <h1 className="text-2xl font-bold mb-4">Reading Comprehension Quiz</h1>
-      <Textarea
-        rows="3"
-        placeholder="Enter a paragraph..."
-        value={paragraph}
-        onChange={(e) => setParagraph(e.target.value)}
-        className="w-full p-2 mb-4 border border-gray-300 rounded dark:border-gray-700"
-      />
-      <Button
-        onClick={generateQuiz}
-        disabled={loading}
-        className="p-2 mb-4 bg-blue-500 text-white dark:bg-blue-700"
-      >
-        {loading ? "Loading..." : "Generate Quiz"}
-      </Button>
-      <div className="text-left border border-gray-300 p-2 rounded mt-4 dark:border-gray-700">
-        {paragraph}
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="flex items-center mb-6">
+        <Button 
+          variant="outline" 
+          className="mr-4 flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800" 
+          asChild
+        >
+          <Link to="/dash">
+            <ArrowLeft className="w-5 h-5" />
+            Back to Dashboard
+          </Link>
+        </Button>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center">
+          <BookOpen className="w-8 h-8 mr-3 text-blue-600" />
+          Reading Comprehension Quiz
+        </h1>
       </div>
-      {loading && (
-        <div className="flex justify-center items-center mt-5">
-        <Loader />
-        </div>
-        )}
-      {quizData && (
-        <Card className="shadow-lg p-4 mt-5 dark:bg-gray-800">
-          <CardContent>
-            <h2 className="text-xl font-bold mb-3">{quizData.title}</h2>
-            {quizData.questions.map((question, index) => (
-              <div key={index} className="mb-4 text-left">
-                <p className="font-medium">
-                  Q{index + 1}: {question.question}
-                </p>
-                <div className="ml-10">
-                  {question.type === "true/false" ? (
-                    <>
-                      {["true", "false"].map((option) => (
-                        <>
+
+      <Card className="shadow-lg dark:bg-gray-900 bg-white">
+        <CardContent className="p-6">
+          <div className="mb-6">
+            <Textarea
+              rows="4"
+              placeholder="Enter a paragraph to generate a quiz..."
+              value={paragraph}
+              onChange={(e) => setParagraph(e.target.value)}
+              className="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300"
+            />
+            <Button
+              onClick={generateQuiz}
+              disabled={loading}
+              className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 dark:bg-blue-800"
+            >
+              {loading ? "Generating Quiz..." : "Generate Quiz"}
+            </Button>
+          </div>
+
+          {paragraph && !loading && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6 border border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                Paragraph Preview:
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">{paragraph}</p>
+            </div>
+          )}
+
+          {loading && (
+            <div className="flex justify-center items-center py-10">
+              <Loader />
+            </div>
+          )}
+
+          {quizData && !loading && (
+            <>
+              <div className="space-y-6">
+                {quizData.questions.map((question, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm"
+                  >
+                    <p className="font-semibold text-gray-800 dark:text-white mb-3">
+                      Q{index + 1}: {question.question}
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {question.type === "true/false" ? (
+                        ["true", "false"].map((option) => (
                           <Label
                             key={option}
-                            className={`inline-flex items-center gap-2 cursor-pointer p-2 border rounded transition-colors ${
+                            className={`flex items-center justify-center p-3 rounded-lg cursor-pointer transition-all duration-300 ${
                               userAnswers[index] === option
-                                ? "bg-blue-500 text-white dark:bg-blue-700"
-                                : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                            } m-2`}
+                                ? "bg-blue-500 text-white"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                            }`}
                           >
                             <input
                               type="radio"
@@ -165,60 +193,69 @@ const QuizApp = () => {
                             />
                             {option.charAt(0).toUpperCase() + option.slice(1)}
                           </Label>
-                          <br />
-                        </>
-                      ))}
-                    </>
-                  ) : (
-                    Object.entries(question.options).map(([key, value]) => (
-                      <>
-                        <Label
-                          key={key}
-                          className={`inline-flex items-center gap-2 cursor-pointer p-2 border rounded transition-colors ${
-                            userAnswers[index] === key
-                              ? "bg-blue-500 text-white dark:bg-blue-700"
-                              : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                          } m-2`}
-                        >
-                          <input
-                            type="radio"
-                            value={key}
-                            checked={userAnswers[index] === key}
-                            onChange={() => handleAnswerChange(index, key)}
-                            className="hidden"
-                          />
-                          {key}) {value}
-                        </Label>
-                        <br />
-                      </>
-                    ))
-                  )}
-                </div>
+                        ))
+                      ) : (
+                        Object.entries(question.options).map(([key, value]) => (
+                          <Label
+                            key={key}
+                            className={`flex items-center p-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                              userAnswers[index] === key
+                                ? "bg-blue-500 text-white"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              value={key}
+                              checked={userAnswers[index] === key}
+                              onChange={() => handleAnswerChange(index, key)}
+                              className="hidden"
+                            />
+                            <span className="font-semibold mr-2">{key})</span> {value}
+                          </Label>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-            <Button
-              onClick={calculateScore}
-              className="w-full p-2 bg-blue-500 text-white rounded mt-2 dark:bg-blue-700"
-            >
-              Submit Quiz
-            </Button>
-          </CardContent>
+
+              <Button
+                onClick={calculateScore}
+                disabled={!allQuestionsAnswered}
+                className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                Submit Quiz
+              </Button>
+            </>
+          )}
+
           {score !== null && (
-            <div className="mt-4">
-              <h3 className="text-lg font-bold">
-                Your score: {score}/{quizData.questions.length} (
-                {((score / quizData.questions.length) * 100).toFixed(1)}%)
-              </h3>
-              <div className="mt-4 w-1/2 mx-auto">
+            <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white flex items-center">
+                  {score / quizData.questions.length > 0.7 ? (
+                    <Check className="w-6 h-6 mr-2 text-green-600" />
+                  ) : (
+                    <X className="w-6 h-6 mr-2 text-red-600" />
+                  )}
+                  Quiz Results
+                </h3>
+                <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                  {score}/{quizData.questions.length} (
+                  {((score / quizData.questions.length) * 100).toFixed(1)}%)
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 mx-auto">
                 <Bar data={chartData} />
               </div>
             </div>
           )}
-        </Card>
-      )}
-      {showAns && <QuizAnswers quizData={quizData} />}
+
+          {showAns && <QuizAnswers quizData={quizData} />}
+        </CardContent>
+      </Card>
     </div>
-    </>
   );
 };
 

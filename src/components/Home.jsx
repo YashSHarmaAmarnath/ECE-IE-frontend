@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 function Home() {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen p-10  text-gray-900 dark:text-white">
-      {/* Top Navigation Bar */}
       <div className="absolute top-4 right-6 flex space-x-4">
         <Button variant="outline" className="px-6 py-2 text-md border-blue-600 text-blue-600 hover:bg-blue-100 dark:text-white dark:hover:bg-gray-800" asChild>
           <Link to="/login">Login</Link>

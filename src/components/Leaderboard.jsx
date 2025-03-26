@@ -86,7 +86,7 @@ const Leaderboard = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white flex items-center justify-center">
-        <Card className="p-6 bg-white dark:bg-gray-800 max-w-lg shadow-lg">
+        <Card className="p-6 bg-blue-50 dark:bg-gray-800 max-w-lg shadow-lg">
           <div className="text-center">
             <AlertCircle size={48} className="mx-auto text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Error Loading Leaderboards</h2>
@@ -98,7 +98,7 @@ const Leaderboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-black dark:text-white">
+    <div className="min-h-screen text-gray-800  dark:text-white">
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -111,8 +111,8 @@ const Leaderboard = () => {
 
         {/* Tabs for different leaderboards */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-4xl mx-auto">
-          <TabsList className="grid grid-cols-2 mb-8 bg-white dark:bg-gray-800">
-            <TabsTrigger value="mcq" className="flex items-center justify-center gap-2 py-3 ">
+          <TabsList className="grid grid-cols-2 mb-8 bg-inherit">
+            <TabsTrigger value="mcq" className="flex items-center justify-center gap-2 py-3">
               <Book size={20} />
               <span>Reading Comprehension</span>
             </TabsTrigger>
@@ -124,7 +124,7 @@ const Leaderboard = () => {
 
           {/* MCQ Leaderboard */}
           <TabsContent value="mcq">
-            <Card className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden">
+            <Card className="bg-blue-50 dark:bg-gray-800 shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-2xl font-bold flex items-center">
                   <Book className="text-green-500 mr-3" size={24} />
@@ -182,7 +182,7 @@ const Leaderboard = () => {
 
           {/* Word Scramble Leaderboard */}
           <TabsContent value="wordscramble">
-            <Card className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden">
+            <Card className="bg-blue-50 dark:bg-gray-800 shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-2xl font-bold flex items-center">
                   <Shuffle className="text-indigo-600 mr-3" size={24} />
@@ -241,7 +241,7 @@ const Leaderboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-          <Card className="bg-white dark:bg-gray-800 p-6 text-center shadow">
+          <Card className="bg-blue-50 dark:bg-gray-800 p-6 text-center shadow">
             <Trophy className="text-yellow-400 mx-auto mb-3" size={32} />
             <h3 className="text-xl font-bold mb-1">Top Score</h3>
             <p className="text-3xl font-bold">
@@ -250,7 +250,7 @@ const Leaderboard = () => {
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Reading Comprehension</p>
           </Card>
           
-          <Card className="bg-white dark:bg-gray-800 p-6 text-center shadow">
+          <Card className="bg-blue-50 dark:bg-gray-800 p-6 text-center shadow">
             <Trophy className="text-yellow-400 mx-auto mb-3" size={32} />
             <h3 className="text-xl font-bold mb-1">Top Score</h3>
             <p className="text-3xl font-bold">
@@ -259,7 +259,7 @@ const Leaderboard = () => {
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Word Scramble</p>
           </Card>
           
-          <Card className="bg-white dark:bg-gray-800 p-6 text-center shadow">
+          <Card className="bg-blue-50 dark:bg-gray-800 p-6 text-center shadow">
             <User className="text-blue-400 mx-auto mb-3" size={32} />
             <h3 className="text-xl font-bold mb-1">Total Players</h3>
             <p className="text-3xl font-bold">

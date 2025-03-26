@@ -51,14 +51,14 @@ const Navbar = () => {
           </>
         ):(<></>)}
           <li>
+            <Link to="/leaderboard">Leaderboard</Link>
+          </li>
+          <li>
             <Link to="/feat">Features</Link>
           </li>
 
           <li>
             <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/leaderboard">Leaderboard</Link>
           </li>
         </ul>
 
@@ -77,19 +77,27 @@ const Navbar = () => {
                 <DropdownMenuItem>
                 <Link to="/">Home</Link>
                 </DropdownMenuItem>
+                {user?
+                (<>
+                <DropdownMenuItem>
+                  <Link to="/dash">Dashboard</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/quiz">MCQ</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/game">Scramble word</Link>
+                </DropdownMenuItem>
+                </>
+              ):(<></>)}
+                <DropdownMenuItem>
+                <Link to="/leaderboard">Leaderboard</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                 <Link to="/feat">Features</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                 <Link to="/about">About</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Button variant="secondary" className="w-full text-sm">
-                    Login
-                  </Button>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Button className="w-full text-sm">Get Started</Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
