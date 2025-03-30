@@ -48,6 +48,9 @@ const Navbar = () => {
           <li>
             <Link to="/game">Scramble word</Link>
           </li>
+          <li>
+            <Link to="/feedback">Feed back</Link>
+          </li>
           </>
         ):(<></>)}
           <li>
@@ -87,6 +90,9 @@ const Navbar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link to="/game">Scramble word</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/feedback">Feed back</Link>
                 </DropdownMenuItem>
                 </>
               ):(<></>)}

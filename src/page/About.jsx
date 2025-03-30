@@ -22,8 +22,8 @@ function About() {
               <li>  4) Rheetik Sharma</li>
               <li>  5) Yash Sharma</li>
               <li>  7) Atharva Shinde</li>
-              <li>  8) Harsh Shrivastav</li>
-              <li>  9) Arvind Shukala</li>
+              <li>  8) Harsh Shrivastava</li>
+              <li>  9) Arvind shukla</li>
             </ul>
           </p>
         </Card>
